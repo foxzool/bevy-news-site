@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE_DESCRIPTION, SITE_NAME } from '../../lib/site';
+---
+
+<Base title="关于" description={`${SITE_NAME}是什么，以及各栏目从哪里来。`} path="/zh/about/">
+  <h1>关于</h1>
+  <div class="prose">
+    <p>{SITE_DESCRIPTION}</p>
+    <p>
+      站点中文优先。默认语言固定在 <code>/zh/</code> 下，站点根路径会跳转到这里。英文
+      <code>/en/</code> 只预留了内容和订阅源，还没有页面。
+    </p>
+    <ul>
+      <li>日报：Bevy Wiki 每日归档，作者 <code>bevy-news-bot</code>。</li>
+      <li>社区动态：Bevy X 上有新内容的日子才会更新。</li>
+      <li>长文：转载自 zool.me，canonical 指向原文。</li>
+      <li>游戏开发：周报，由游戏开发资讯流程写入 <code>gamedev/</code>。</li>
+      <li>版本：从日报里带有迁移标签的条目聚合。</li>
+    </ul>
+    <p>
+      仓库公开：<a href="https://github.com/foxzool/bevy-news-site">foxzool/bevy-news-site</a>。不要把密钥、令牌、
+      <code>.env</code>、抓取缓存或 <code>seen.json</code> 放进仓库。
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import EntryList from '../../../components/EntryList.astro';
+import { getPublished } from '../../../lib/content';
+
+const entries = await getPublished('xscan', 'zh');
+---
+
+<Base title="社区动态" description="Bevy 社区与 X 上的动态摘要。" path="/zh/x/">
+  <h1>社区动态</h1>
+  <p class="lede">
+    有新内容的日子才会更新。<a href="/zh/x/rss.xml">订阅本栏目</a>
+  </p>
+  <EntryList items={entries} empty="还没有社区动态。" />
+</Base>

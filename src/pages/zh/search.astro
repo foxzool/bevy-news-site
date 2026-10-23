@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="搜索" description="在开发者简报里搜索日报、社区动态和长文。" path="/zh/search/">
+  <h1>搜索</h1>
+  <p class="lede">索引在构建时由 Pagefind 生成，覆盖页面里的正文。</p>
+  <link slot="head" href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <div id="search" data-pagefind-ignore></div>
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      const ui = window.PagefindUI;
+      if (!ui) return;
+      new ui({
+        element: '#search',
+        showSubResults: true,
+        translations: {
+          placeholder: '搜索日报、动态与长文',
+          zero_results: '没有找到与 [SEARCH_TERM] 匹配的内容',
+          many_results: '[COUNT] 条结果',
+          one_result: '[COUNT] 条结果',
+          searching: '正在搜索 [SEARCH_TERM]',
+        },
+      });
+    });
+  </script>
+</Base>

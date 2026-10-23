@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import EntryList from '../../../components/EntryList.astro';
+import { getPublished } from '../../../lib/content';
+
+const entries = await getPublished('gamedev', 'zh');
+---
+
+<Base title="游戏开发" description="游戏开发资讯周报。" path="/zh/gamedev/">
+  <h1>游戏开发</h1>
+  <p class="lede">
+    每周精选。内容写入 <code>src/content/gamedev/zh/</code>。<a href="/zh/gamedev/rss.xml">订阅本栏目</a>
+  </p>
+  <EntryList items={entries} empty="还没有游戏开发周报。" />
+</Base>

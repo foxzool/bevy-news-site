@@ -1,0 +1,66 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import type { AnyEntry } from '../lib/content';
+import { hreflangLinks, hrefFor, isQuietDay } from '../lib/content';
+import { SITE_NAME, absoluteUrl, formatDate, shanghaiDate } from '../lib/site';
+
+interface Props {
+  entry: AnyEntry;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const path = hrefFor(entry.collection, entry.id);
+const selfUrl = absoluteUrl(path);
+const canonical = entry.data.type === 'article' ? entry.data.source_url : selfUrl;
+const alternates = await hreflangLinks(entry.data.translationKey);
+const noindex = isQuietDay(entry);
+const jsonType = entry.data.type === 'article' || entry.data.type === 'gamedev' ? 'BlogPosting' : 'NewsArticle';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': jsonType,
+  headline: entry.data.title,
+  description: entry.data.summary,
+  datePublished: entry.data.date.toISOString(),
+  inLanguage: entry.data.lang === 'zh' ? 'zh-CN' : 'en',
+  author: { '@type': 'Organization', name: entry.data.author },
+  publisher: { '@type': 'Organization', name: SITE_NAME },
+  mainEntityOfPage: canonical,
+  url: selfUrl,
+};
+---
+
+<Base
+  title={entry.data.title}
+  description={entry.data.summary}
+  path={path}
+  canonical={canonical}
+  ogType="article"
+  noindex={noindex}
+  alternates={alternates}
+  jsonLd={jsonLd}
+>
+  <article class="prose">
+    <p class="meta">
+      <time datetime={shanghaiDate(entry.data.date)}>{formatDate(entry.data.date)}</time>
+      · {entry.data.author}
+    </p>
+    <h1>{entry.data.title}</h1>
+    <p class="lede">{entry.data.summary}</p>
+    <ul class="tags">
+      {
+        entry.data.tags.map((tag) => (
+          <li>
+            <a href={`/zh/tags/${encodeURIComponent(tag)}/`}>{tag}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <Content />
+    <p class="source">
+      来源：<a href={entry.data.source_url}>{entry.data.source_url}</a>
+    </p>
+  </article>
+</Base>

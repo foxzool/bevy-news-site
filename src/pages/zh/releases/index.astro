@@ -1,0 +1,13 @@
+---
+import Base from '../../../layouts/Base.astro';
+import EntryList from '../../../components/EntryList.astro';
+import { getPublished, isMigrationEntry } from '../../../lib/content';
+
+const entries = (await getPublished('daily', 'zh')).filter((entry) => isMigrationEntry(entry.tags));
+---
+
+<Base title="版本" description="从日报中聚合的版本与迁移条目。" path="/zh/releases/">
+  <h1>版本与迁移</h1>
+  <p class="lede">列出日报里带有 migration、M-Migration-Guide 或「迁移」标签的条目。</p>
+  <EntryList items={entries} empty="还没有带迁移标签的日报。" />
+</Base>

@@ -1,0 +1,22 @@
+---
+import Base from '../../../layouts/Base.astro';
+import EntryList from '../../../components/EntryList.astro';
+import { allPublished } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const tags = new Set<string>();
+  for (const entry of await allPublished('zh')) {
+    for (const tag of entry.tags) tags.add(tag);
+  }
+  return [...tags].map((tag) => ({ params: { tag } }));
+}
+
+const tag = Astro.params.tag ?? '';
+const items = (await allPublished('zh')).filter((entry) => entry.tags.includes(tag));
+---
+
+<Base title={tag} description={`标签「${tag}」下的条目。`} path={`/zh/tags/${encodeURIComponent(tag)}/`}>
+  <h1>{tag}</h1>
+  <p class="lede">{items.length} 条</p>
+  <EntryList items={items} empty="这个标签下还没有文章。" />
+</Base>
