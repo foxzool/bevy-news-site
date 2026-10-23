@@ -45,5 +45,14 @@ jobs:
 
       - run: npm run build
 
+      - name: Ensure Cloudflare Pages project exists
+        run: |
+          set -euo pipefail
+          if npx --yes wrangler@4 pages project list 2>/dev/null | grep -qE '(^|\s)bevy-news-site(\s|$)'; then
+            echo "Pages project bevy-news-site already exists"
+          else
+            npx --yes wrangler@4 pages project create bevy-news-site --production-branch=main
+          fi
+
       - name: Deploy to Cloudflare Pages
         run: npx --yes wrangler@4 pages deploy dist --project-name=bevy-news-site --commit-dirty=true
