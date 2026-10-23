@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import EntryList from '../../../components/EntryList.astro';
+import { getPublished } from '../../../lib/content';
+
+const entries = await getPublished('daily', 'zh');
+---
+
+<Base title="日报" description="Bevy Wiki 日报。" path="/zh/daily/">
+  <h1>日报</h1>
+  <p class="lede">
+    Bevy Wiki 每日归档。<a href="/zh/daily/rss.xml">订阅本栏目</a>
+  </p>
+  <EntryList items={entries} empty="还没有日报。" />
+</Base>

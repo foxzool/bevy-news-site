@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import EntryList from '../../components/EntryList.astro';
+import { getPublished } from '../../lib/content';
+import { SITE_DESCRIPTION, SITE_NAME } from '../../lib/site';
+
+const daily = await getPublished('daily', 'zh');
+const xscan = await getPublished('xscan', 'zh');
+const articles = await getPublished('articles', 'zh');
+---
+
+<Base title={SITE_NAME} description={SITE_DESCRIPTION} path="/zh/">
+  <h1>{SITE_NAME}</h1>
+  <p class="lede">{SITE_DESCRIPTION}</p>
+
+  <section>
+    <h2>最新日报</h2>
+    <EntryList items={daily.slice(0, 1)} empty="还没有日报。" heading="h3" />
+    <p class="more"><a href="/zh/daily/">全部日报</a></p>
+  </section>
+
+  <section>
+    <h2>社区动态</h2>
+    <EntryList items={xscan.slice(0, 3)} empty="还没有社区动态。" heading="h3" />
+    <p class="more"><a href="/zh/x/">全部动态</a></p>
+  </section>
+
+  <section>
+    <h2>长文</h2>
+    <EntryList items={articles.slice(0, 3)} empty="还没有长文。" heading="h3" />
+    <p class="more"><a href="/zh/articles/">全部长文</a></p>
+  </section>
+</Base>

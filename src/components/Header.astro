@@ -1,0 +1,43 @@
+---
+import { SITE_NAME } from '../lib/site';
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+
+const links = [
+  { href: '/zh/', label: '首页' },
+  { href: '/zh/daily/', label: '日报' },
+  { href: '/zh/x/', label: '社区动态' },
+  { href: '/zh/articles/', label: '长文' },
+  { href: '/zh/gamedev/', label: '游戏开发' },
+  { href: '/zh/releases/', label: '版本' },
+  { href: '/zh/tags/', label: '标签' },
+  { href: '/zh/about/', label: '关于' },
+  { href: '/zh/search/', label: '搜索' },
+];
+
+function current(href: string): boolean {
+  const path = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  if (href === '/zh/') return path === '/zh/';
+  return path === href || path.startsWith(href);
+}
+---
+
+<header class="masthead" data-pagefind-ignore>
+  <div class="wrap masthead-inner">
+    <a class="brand" href="/zh/">{SITE_NAME}</a>
+    <p class="domain">news.zool.me</p>
+    <nav aria-label="栏目">
+      {
+        links.map((link) => (
+          <a href={link.href} aria-current={current(link.href) ? 'page' : undefined}>
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

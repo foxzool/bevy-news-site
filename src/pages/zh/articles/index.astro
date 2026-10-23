@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import EntryList from '../../../components/EntryList.astro';
+import { getPublished } from '../../../lib/content';
+
+const entries = await getPublished('articles', 'zh');
+---
+
+<Base title="长文" description="转载的长文。canonical 指向 zool.me 原文。" path="/zh/articles/">
+  <h1>长文</h1>
+  <p class="lede">
+    与 zool.me 同步的长文，原文地址写在 canonical。<a href="/zh/articles/rss.xml">订阅本栏目</a>
+  </p>
+  <EntryList items={entries} empty="还没有长文。" />
+</Base>

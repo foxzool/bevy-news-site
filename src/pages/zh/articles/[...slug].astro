@@ -1,0 +1,16 @@
+---
+import EntryView from '../../../components/EntryView.astro';
+import { getPublishedEntry, pathsFor } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  return pathsFor('articles', 'zh');
+}
+
+const { id } = Astro.props;
+const entry = await getPublishedEntry('articles', id);
+if (!entry) {
+  return Astro.redirect('/zh/articles/');
+}
+---
+
+<EntryView entry={entry} />

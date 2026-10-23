@@ -1,0 +1,22 @@
+---
+const target = '/zh/';
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>开发者简报</title>
+    <link rel="canonical" href="https://news.zool.me/zh/" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body data-pagefind-ignore="all">
+    <p><a href={target}>进入开发者简报</a></p>
+    <script is:inline>
+      location.replace('/zh/');
+    </script>
+  </body>
+</html>
