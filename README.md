@@ -1,4 +1,4 @@
-# 开发者简报
+# 狐闻
 
 公开新闻站，域名 [news.zool.me](https://news.zool.me)。中文优先：默认语言是 `zh`，并且 `prefixDefaultLocale: true`，所以页面都在 `/zh/` 下。站点根路径 `/` 用 meta refresh 跳到 `/zh/`。英文 `/en/` 只预留了内容目录和 `/en/rss.xml`，还没有页面。
 
@@ -41,9 +41,9 @@ npm run pagefind
 
 本仓库公开。不要提交密钥、令牌、`.env`、`secrets/`、抓取缓存或 `seen.json`。Cloudflare 与 GitHub Actions 的凭据只放在托管平台的 Secrets 里，不要写进仓库，也不要在这里绑定域名或 DNS。
 
-# Developer Briefing
+# 狐闻
 
-Public site for **开发者简报** at [news.zool.me](https://news.zool.me). Chinese-first: the default locale is `zh` with `prefixDefaultLocale: true`, so the site lives under `/zh/`. `/` meta-refreshes to `/zh/`. `/en/` is reserved (empty content dirs plus `/en/rss.xml`) and has no pages yet.
+Public site for **狐闻** at [news.zool.me](https://news.zool.me). Chinese-first: the default locale is `zh` with `prefixDefaultLocale: true`, so the site lives under `/zh/`. `/` meta-refreshes to `/zh/`. `/en/` is reserved (empty content dirs plus `/en/rss.xml`) and has no pages yet.
 
 Pinned to Astro **5.18.2**, the latest stable 5.x. `astro@latest` on npm is 7.x; do not upgrade this repo onto that line by accident.
 
