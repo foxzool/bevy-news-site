@@ -4,6 +4,6 @@ import { feedTitle, renderFeed } from '../../../lib/feed';
 export const GET: APIRoute = (context) =>
   renderFeed(context, {
     title: feedTitle.articles,
-    description: '开发者简报长文。',
+    description: '狐闻长文。',
     collections: ['articles'],
   });

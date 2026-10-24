@@ -9,7 +9,7 @@ for (const entry of await allPublished('zh')) {
 const tags = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'zh'));
 ---
 
-<Base title="标签" description="按标签浏览开发者简报。" path="/zh/tags/">
+<Base title="标签" description="按标签浏览狐闻。" path="/zh/tags/">
   <h1>标签</h1>
   {
     tags.length === 0 ? (
